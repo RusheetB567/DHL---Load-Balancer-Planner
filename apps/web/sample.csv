@@ -1,0 +1,3 @@
+reference,dueAt,mawb,client,destination,barcode,weightKg,lengthCm,widthCm,heightCm
+SYN-CSV-001,2026-10-10T17:00:00+10:30,081-00000002,Synthetic Account,Synthetic Netley location,SYN-C001,85,120,80,95
+SYN-CSV-001,2026-10-10T17:00:00+10:30,081-00000002,Synthetic Account,Synthetic Netley location,SYN-C002,15,50,50,50

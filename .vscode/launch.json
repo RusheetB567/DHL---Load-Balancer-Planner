@@ -1,0 +1,14 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "IFOROS: Debug local development",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/scripts/dev.cjs",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "skipFiles": ["<node_internals>/**"]
+    }
+  ]
+}

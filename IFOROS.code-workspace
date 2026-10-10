@@ -1,0 +1,7 @@
+{
+  "folders": [{ "path": "." }],
+  "settings": {
+    "files.exclude": { ".data": true },
+    "search.exclude": { ".data/**": true }
+  }
+}
