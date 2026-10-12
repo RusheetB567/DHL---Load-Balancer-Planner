@@ -1,5 +1,7 @@
 # IFOROS risks, limitations and operational gates
 
+11 October increment: database-backed draft run assignment, driver parcel acknowledgement, depot approval of removal requests and delivery-only road planning now exist. Only fixed synthetic stops have demonstration road data; other addresses require an approved provider. This does not complete the external driver integration, pickups, dispatch release, physical loading or enterprise security gates below. See `RUN_WORKFLOW.md` for current implementation evidence.
+
 Status: initial register. Owners below are required accountability roles; individual appointments and decision dates await discovery. The first milestone is local development software and synthetic workflow evidence, not an approved freight operating system.
 
 | ID | Risk / present limitation | Control or next action | Accountable owner / gate |

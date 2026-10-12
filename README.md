@@ -1,5 +1,7 @@
 # IFOROS — freight operations foundation
 
+The depot and driver planning increment is described in [run workflow](docs/RUN_WORKFLOW.md): check-in panel, draft postcode allocations, depot confirmation, driver parcel scans, route edits and a road-based synthetic demonstration. The scanner vendor integration remains pending.
+
 The first executable milestone for the staged Netley brief. Reuses the inspected CisDriver 3 cargo concepts: consignment references, individual package dimensions, server-calculated totals, validated scans, depot isolation, optimistic versions, idempotency and audit evidence.
 
 This repository now includes a working local frontend, REST backend and persistent SQLite database. It is a development foundation for synthetic data, with no live DHL connection or operational release approval. The enterprise stack and integration gates remain in the backlog.
@@ -8,15 +10,17 @@ This repository now includes a working local frontend, REST backend and persiste
 
 For VS Code, open `IFOROS.code-workspace`. Included tasks start the app and run the pre-commit checks; the debug configuration starts the local backend. See [commit review](docs/COMMIT_REVIEW.md) for the review scope.
 
-Requires Node.js 24.14 or later. No package downloads required.
+Requires Node.js 24.14 or later. Install the locally served ZXing barcode decoder on first setup with `npm ci`.
 
 ```powershell
-node scripts/dev.cjs
+npm run dev
 ```
 
 Open http://127.0.0.1:4300, select a demo role, and click **Open demo workspace**. This explicit local demo seeds synthetic shipments, a receiving scan, missing-piece reconciliation and a customs hold when the database is empty. Credentials live in server memory and change on restart. Browser tokens are kept in memory only. `supervisor` can import and receive; `compliance` records holds and decisions. Disconnect to switch roles. All data persists in `.data/iforos.sqlite`. You can also double-click `Start IFOROS.cmd` to start the server.
 
 Demo role access is enabled only by `scripts/dev.cjs`, for loopback access with the expected localhost host. It intentionally allows local users to explore all synthetic roles. Use only synthetic data in this mode. `npm start` does not expose the demo role endpoint.
+
+Keep the terminal running while using the website. Press Ctrl+C to stop it. If port 4300 is already in use, open the existing localhost page or stop the application using that port before starting again. The Desktop project folder opens the same source files as this workspace.
 
 For explicitly configured local credentials, set `IFOROS_USERS` to a JSON array of `{id,role,depot,token}` and use `npm start`. Tokens must be unique and at least 32 characters. Never commit credentials. All servers bind to loopback. This local bearer mechanism does not implement enterprise SSO/MFA or production transport encryption.
 
@@ -37,6 +41,14 @@ npm run check
 ```
 
 Tests exercise HTTP authorization, cross-depot isolation, transaction rollback, grouped-package rejection, source release distrust, version conflicts, replay, receiving, holds, audit immutability and restart persistence.
+
+## Barcode scanning
+
+Open **Barcode scanning** after signing in. **Open phone camera** requests camera permission, prefers the rear camera and decodes barcodes locally with ZXing (including Code 128, Code 39, EAN/UPC and QR). Detection stops the camera and fills the barcode for review; **Confirm receiving** records the physical event through the existing role, version and duplicate checks. Frames are not uploaded. Stop, navigation, logout and leaving the page release the camera.
+
+USB/Bluetooth scanners configured as keyboard input can scan into the focused barcode box and send Enter. Unknown scans create exceptions; repeated scans cannot receive the piece twice. Other scanner protocols require their vendor integration.
+
+Phone access requires an approved reachable HTTPS deployment; `127.0.0.1` on the phone is the phone itself. The current local server remains PC-only. This change does not configure a public deployment, phone push notification, or SMS invitation. Camera denial/no-device messages explain how to use scanner/manual input instead.
 
 ## Imports and CisDriver 3
 
