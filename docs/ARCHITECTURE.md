@@ -1,5 +1,7 @@
 # IFOROS architecture and integration boundaries
 
+11 October increment: `planning.cjs`, `routing.cjs` and migration 002 now implement run assignment, parcel acknowledgements, removal requests and delivery-only route ordering. Their contracts, limits and execution evidence are in `RUN_WORKFLOW.md`; they supersede earlier statements below that no planning implementation exists. No approved live integration or dispatch authority is implied.
+
 Status: first executable local freight foundation implemented; not a production or pilot approval. This document interprets the two supplied IFOROS directives. The source Driver App - Replica(CisDriver3) was inspected read-only; no live DHL connection or access approval has been established.
 
 ## Delivery boundary

@@ -1,5 +1,7 @@
 # First milestone delivery evidence
 
+Update, 11 October 2026: the depot/driver planning increment and fifteen passing tests are documented in `RUN_WORKFLOW.md`. That document supersedes the initial milestone's deferral of basic run assignment, driver scanning and delivery-only route planning. Live dispatch, external driver/scanner app integration, full pickup/delivery optimisation and enterprise approvals remain unavailable.
+
 Delivered 10 October 2026 (Adelaide). Local synthetic freight foundation; not a complete enterprise release.
 
 ## Inspected environment

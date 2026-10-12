@@ -4,7 +4,7 @@
     {
       "label": "IFOROS: Start local development",
       "type": "shell",
-      "command": "node scripts/dev.cjs",
+      "command": "npm run dev",
       "options": { "cwd": "${workspaceFolder}" },
       "problemMatcher": [],
       "presentation": { "reveal": "always", "panel": "dedicated" }
