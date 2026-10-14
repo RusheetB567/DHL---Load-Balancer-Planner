@@ -1,0 +1,5 @@
+const test=require('node:test'),assert=require('node:assert/strict');
+const {cycleWindow,adelaideTime}=require('../apps/api/operations.cjs');
+test('A cycle is 07:00–11:45 in Adelaide daylight saving time',()=>{const w=cycleWindow({finger:1,cycle:'A',operatingDate:'2026-10-14'});assert.equal(w.startAt,'2026-10-13T20:30:00.000Z');assert.equal(w.endAt,'2026-10-14T01:15:00.000Z');});
+test('B cycle supports the 16:00–17:00 finish range and standard timezone',()=>{const w=cycleWindow({finger:3,cycle:'B',operatingDate:'2026-06-14',cycleStart:'11:30',cycleEnd:'16:00'});assert.equal(w.startAt,'2026-06-14T02:00:00.000Z');assert.equal(w.endAt,'2026-06-14T06:30:00.000Z');assert.equal(adelaideTime('2026-06-14','07:00'),'2026-06-13T21:30:00.000Z');});
+test('invalid fingers and out-of-cycle times are rejected',()=>{assert.throws(()=>cycleWindow({finger:4,cycle:'A',operatingDate:'2026-10-14'}),e=>e.code==='INVALID_CYCLE');assert.throws(()=>cycleWindow({finger:1,cycle:'A',operatingDate:'2026-10-14',cycleEnd:'17:00'}),e=>e.code==='INVALID_CYCLE');});

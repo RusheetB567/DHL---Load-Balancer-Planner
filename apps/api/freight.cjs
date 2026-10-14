@@ -65,7 +65,7 @@ function createFreight(filename=':memory:'){
    event(u,'shipment.imported',id,{source,reference:s.reference,pieces:s.pieces.length});result.created.push(id);
   }return result;});
  }
- function receive(u,body,key){allowed(u,['warehouse','supervisor']);const barcode=text(body.barcode,'Barcode'),location=text(body.location,'Location');check(/^NETLEY\/(RECEIVING|STAGING|FINGER-[A-Z0-9]+)$/.test(location)&&u.depot==='NETLEY',400,'INVALID_LOCATION','Use a configured Netley receiving, staging or finger location.');
+ function receive(u,body,key){allowed(u,['warehouse','supervisor']);const barcode=text(body.barcode,'Barcode'),location=text(body.location,'Location');check(/^NETLEY\/(RECEIVING|STAGING|FINGER-[123ABC])$/.test(location)&&u.depot==='NETLEY',400,'INVALID_LOCATION','Use a configured Netley receiving, staging or finger location.');
   const result=mutate(u,key,{operation:'receive',body},()=>{const p=db.prepare('SELECT * FROM pieces WHERE depot=? AND barcode=?').get(u.depot,barcode);
    if(!p){exception(u,null,'UNKNOWN_BARCODE',barcode);event(u,'receiving.unknown',barcode,{});return {rejected:'UNKNOWN_BARCODE',message:'Unknown barcode entered the exception register.'};}
    const s=scoped(u,p.shipment_id);
