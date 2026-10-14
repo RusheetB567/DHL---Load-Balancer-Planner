@@ -17,7 +17,7 @@ if(!planning.board(users[0]).runs.length){
  const shipments=[['SYN-RUN-101','SYN-R101','5037','Synthetic stop · Netley',-34.947,138.551],['SYN-RUN-102','SYN-R102','5037','Synthetic stop · Kurralta Park',-34.951,138.565],['SYN-RUN-103','SYN-R103','5038','Synthetic stop · Plympton',-34.961,138.555]].map(([reference,barcode,postcode,destination,lat,lon])=>({reference,synthetic:true,postcode,destination,coordinates:{lat,lon},addressVerified:true,dueAt,pieces:[{barcode,weightKg:5,lengthCm:30,widthCm:25,heightCm:20}]}));
  const result=freight.importFreight(users[0],{format:'json',shipments},'demo-run-parcels');
  for(const s of shipments)freight.receive(users[0],{barcode:s.pieces[0].barcode,location:'NETLEY/RECEIVING',version:1},'demo-run-receive-'+s.reference);
- const r=planning.create(users[0],{name:'Netley demo run',driverId:'local-driver',postcodes:['5037','5038'],capacityKg:800,capacityM3:8,startAt:day+'T00:00:00Z',endAt:day+'T23:59:00Z',depotLat:-34.948,depotLon:138.548},'demo-run-create');
+ const r=planning.create(users[0],{name:'Netley demo run',finger:1,cycle:'A',operatingDate:day,driverId:'local-driver',postcodes:['5037','5038'],capacityKg:800,capacityM3:8,startAt:day+'T00:00:00Z',endAt:day+'T23:59:00Z',depotLat:-34.948,depotLon:138.548},'demo-run-create');
  planning.auto(users[0],{},'demo-run-allocate');
  planning.send(users[0],r.id,{version:planning.detail(users[0],r.id).version,rehearsal:true},'demo-run-send');
 }

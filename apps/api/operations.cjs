@@ -9,7 +9,7 @@ function adelaideTime(date,time){
 function cycleWindow(b){
  if(![1,2,3].includes(Number(b.finger))||!['A','B'].includes(b.cycle))throw new Fault(400,'INVALID_CYCLE','Choose Finger 1, 2 or 3 and Cycle A or B.');
  const start=b.cycleStart||(b.cycle==='A'?'07:00':'11:45'),end=b.cycleEnd||(b.cycle==='A'?'11:45':'17:00');
- if((b.cycle==='A'&&(start<'07:00'||end>'11:45'))||(b.cycle==='B'&&(start<'11:30'||end>'17:00'))||start>=end)throw new Fault(400,'INVALID_CYCLE','Cycle times are outside the approved planning window.');
+ if((b.cycle==='A'&&(start!=='07:00'||end<'11:30'||end>'11:45'))||(b.cycle==='B'&&(start<'11:30'||start>'11:45'||end<'16:00'||end>'17:00'))||start>=end)throw new Fault(400,'INVALID_CYCLE','Cycle times are outside the approved planning window.');
  return {finger:Number(b.finger),cycle:b.cycle,date:b.operatingDate,startAt:adelaideTime(b.operatingDate,start),endAt:adelaideTime(b.operatingDate,end)};
 }
 module.exports={adelaideTime,cycleWindow};
