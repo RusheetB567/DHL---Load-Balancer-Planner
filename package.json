@@ -9,7 +9,7 @@
     "dev": "node scripts/dev.cjs",
     "start": "node apps/api/server.cjs",
     "test": "node --test --test-isolation=none tests/*.test.cjs",
-    "check": "node --check apps/api/server.cjs && node --check apps/api/freight.cjs && node --check scripts/dev.cjs && node --check apps/web/app.js && node --check apps/web/scanner.js && node --check apps/api/planning.cjs && node --check apps/api/routing.cjs && node --check apps/web/planning.js && node --check apps/web/experience.js && node --check apps/web/route-map.js && node --check apps/api/operations.cjs"
+    "check": "node --check apps/api/server.cjs && node --check apps/api/freight.cjs && node --check scripts/dev.cjs && node --check apps/web/app.js && node --check apps/web/scanner.js && node --check apps/api/planning.cjs && node --check apps/api/routing.cjs && node --check apps/web/planning.js && node --check apps/web/experience.js && node --check apps/web/route-map.js && node --check apps/api/operations.cjs && node --check apps/api/workload.cjs"
   },
   "dependencies": {
     "@zxing/library": "^0.23.0"

@@ -1,5 +1,7 @@
 # IFOROS — freight operations foundation
 
+The latest [engineering audit and Parts A–G](docs/ENGINEERING_REVIEW_2026-10-14.md) distinguish current capabilities from the enterprise target. [Controlled increment 01](docs/ENGINEERING_INCREMENT_01.md) adds eligibility-safe allocation and transparent workload lower bounds; 23 tests pass. This is still a development foundation, not enterprise-ready or live DHL-integrated software.
+
 The depot and driver planning increment is described in [run workflow](docs/RUN_WORKFLOW.md): check-in panel, draft postcode allocations, depot confirmation, driver parcel scans, route edits and a road-based synthetic demonstration. The scanner vendor integration remains pending.
 
 The first executable milestone for the staged Netley brief. Reuses the inspected CisDriver 3 cargo concepts: consignment references, individual package dimensions, server-calculated totals, validated scans, depot isolation, optimistic versions, idempotency and audit evidence.
