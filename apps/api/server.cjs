@@ -14,6 +14,7 @@ function createServer({filename=path.join(__dirname,'../../.data/iforos.sqlite')
   res.setHeader('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'none'");
   try{
    const url=new URL(req.url,'http://localhost'),p=url.pathname;
+   if(p==='/api/health'&&req.method==='GET'){freight.db.prepare('SELECT 1').get();return send(res,200,{service:'iforos',ready:true});}
    if(!p.startsWith('/api/')){if(req.method!=='GET')throw new Fault(405,'METHOD','Use GET.');const assets={'/':'index.html','/app.js':'app.js','/style.css':'style.css','/sample.json':'sample.json','/sample.csv':'sample.csv','/redesign.css':'redesign.css','/route-map.js':'route-map.js','/experience.js':'experience.js','/planning.js':'planning.js','/scanner.js':'scanner.js','/barcode-decoder.js':'../../node_modules/@zxing/library/umd/index.min.js'};if(!assets[p])throw new Fault(404,'NOT_FOUND','Page not found.');res.setHeader('Content-Type',{'/':'text/html','/app.js':'text/javascript','/style.css':'text/css','/sample.json':'application/json','/sample.csv':'text/csv','/redesign.css':'text/css','/route-map.js':'text/javascript','/experience.js':'text/javascript','/planning.js':'text/javascript','/scanner.js':'text/javascript','/barcode-decoder.js':'text/javascript'}[p]);return res.end(fs.readFileSync(path.join(web,assets[p])));}
    // Explicit synthetic demo only: loopback, same-origin, ephemeral role credentials.
    if(p==='/api/demo'&&req.method==='GET'){

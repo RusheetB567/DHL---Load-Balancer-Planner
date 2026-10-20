@@ -2,6 +2,13 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "IFOROS: Start persistent preview",
+      "type": "shell",
+      "command": "npm run preview",
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
+    },
+    {
       "label": "IFOROS: Start local development",
       "type": "shell",
       "command": "npm run dev",

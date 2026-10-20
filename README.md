@@ -10,6 +10,8 @@ This repository now includes a working local frontend, REST backend and persiste
 
 ## Run
 
+For a preview that keeps running after the terminal closes, use `npm run preview` or double-click **Start IFOROS.cmd**. It checks `/api/health`, reuses a healthy IFOROS server, and starts a background process if none is running. Logs are in `.data/preview.log`. The preview is still local synthetic development, not a production deployment.
+
 For VS Code, open `IFOROS.code-workspace`. Included tasks start the app and run the pre-commit checks; the debug configuration starts the local backend. See [commit review](docs/COMMIT_REVIEW.md) for the review scope.
 
 Requires Node.js 24.14 or later. Install the locally served ZXing barcode decoder on first setup with `npm ci`.
