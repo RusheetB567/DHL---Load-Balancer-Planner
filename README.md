@@ -1,5 +1,15 @@
 # IFOROS — freight operations foundation
 
+## Start here — for depot staff and drivers
+
+IFOROS helps staff check parcels into the depot, organise them by **Finger 1, 2 or 3** and **A/B cycle**, plan delivery runs, and let drivers check their assigned parcels and request changes.
+
+**Read the [Simple User Guide](USER_GUIDE.md)** for a plain-language explanation, opening instructions and step-by-step depot and driver workflows.
+
+This is a development system with sample demonstrations. Live DHL/scanner integration and operational dispatch approval are still outstanding.
+
+---
+
 The latest [engineering audit and Parts A–G](docs/ENGINEERING_REVIEW_2026-10-14.md) distinguish current capabilities from the enterprise target. [Controlled increment 01](docs/ENGINEERING_INCREMENT_01.md) adds eligibility-safe allocation and transparent workload lower bounds; 23 tests pass. This is still a development foundation, not enterprise-ready or live DHL-integrated software.
 
 The depot and driver planning increment is described in [run workflow](docs/RUN_WORKFLOW.md): check-in panel, draft postcode allocations, depot confirmation, driver parcel scans, route edits and a road-based synthetic demonstration. The scanner vendor integration remains pending.
