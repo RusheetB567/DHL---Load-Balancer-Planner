@@ -29,7 +29,7 @@ function normalize(body){
  }
  if(body.format==='csv'){
   const grouped=new Map();for(const r of parseCSV(body.content)){
-   const meta={reference:r.reference,dueAt:r.dueAt,awb:r.awb||'',mawb:r.mawb||'',hawb:r.hawb||'',client:r.client||'',destination:r.destination||''};
+   const meta={reference:r.reference,dueAt:r.dueAt,awb:r.awb||'',mawb:r.mawb||'',hawb:r.hawb||'',client:r.client||'',destination:r.destination||'',suburb:r.suburb||'',postcode:r.postcode||'',planningDate:r.planningDate||'',planningCycle:r.planningCycle||''};
    if(grouped.has(r.reference))check(JSON.stringify(grouped.get(r.reference).meta)===JSON.stringify(meta),400,'SHIPMENT_CONFLICT','Rows disagree on shipment fields.');else grouped.set(r.reference,{meta,pieces:[]});
    for(const field of ['weightKg','lengthCm','widthCm','heightCm'])check(typeof r[field]==='string'&&r[field].trim()!=='',400,'INVALID_INPUT',`${field} is required.`);
    grouped.get(r.reference).pieces.push({barcode:r.barcode,weightKg:Number(r.weightKg),lengthCm:Number(r.lengthCm),widthCm:Number(r.widthCm),heightCm:Number(r.heightCm)});
@@ -65,7 +65,7 @@ function createFreight(filename=':memory:'){
    event(u,'shipment.imported',id,{source,reference:s.reference,pieces:s.pieces.length});result.created.push(id);
   }return result;});
  }
- function receive(u,body,key){allowed(u,['warehouse','supervisor']);const barcode=text(body.barcode,'Barcode'),location=text(body.location,'Location');check(/^NETLEY\/(RECEIVING|STAGING|FINGER-[A-Z0-9]+)$/.test(location)&&u.depot==='NETLEY',400,'INVALID_LOCATION','Use a configured Netley receiving, staging or finger location.');
+ function receive(u,body,key){allowed(u,['warehouse','supervisor']);const barcode=text(body.barcode,'Barcode'),location=text(body.location,'Location');check(/^NETLEY\/(RECEIVING|STAGING|FINGER-[123ABC])$/.test(location)&&u.depot==='NETLEY',400,'INVALID_LOCATION','Use a configured Netley receiving, staging or finger location.');
   const result=mutate(u,key,{operation:'receive',body},()=>{const p=db.prepare('SELECT * FROM pieces WHERE depot=? AND barcode=?').get(u.depot,barcode);
    if(!p){exception(u,null,'UNKNOWN_BARCODE',barcode);event(u,'receiving.unknown',barcode,{});return {rejected:'UNKNOWN_BARCODE',message:'Unknown barcode entered the exception register.'};}
    const s=scoped(u,p.shipment_id);

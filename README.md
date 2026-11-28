@@ -1,5 +1,19 @@
 # IFOROS — freight operations foundation
 
+New: [advance freight forecasting, request-only FLEXI support, address-camera capture and premium route/stop workflows](docs/ADVANCE_PLANNING_AND_PREMIUM.md). These use the photographed territory catalogue as draft data pending depot review.
+
+## Start here — for depot staff and drivers
+
+IFOROS helps staff check parcels into the depot, organise them by **Finger 1, 2 or 3** and **A/B cycle**, plan delivery runs, and let drivers check their assigned parcels and request changes.
+
+**Read the [Simple User Guide](USER_GUIDE.md)** for a plain-language explanation, opening instructions and step-by-step depot and driver workflows.
+
+This is a development system with sample demonstrations. Live DHL/scanner integration and operational dispatch approval are still outstanding.
+
+---
+
+The latest [engineering audit and Parts A–G](docs/ENGINEERING_REVIEW_2026-10-14.md) distinguish current capabilities from the enterprise target. [Controlled increment 01](docs/ENGINEERING_INCREMENT_01.md) adds eligibility-safe allocation and transparent workload lower bounds; 23 tests pass. This is still a development foundation, not enterprise-ready or live DHL-integrated software.
+
 The depot and driver planning increment is described in [run workflow](docs/RUN_WORKFLOW.md): check-in panel, draft postcode allocations, depot confirmation, driver parcel scans, route edits and a road-based synthetic demonstration. The scanner vendor integration remains pending.
 
 The first executable milestone for the staged Netley brief. Reuses the inspected CisDriver 3 cargo concepts: consignment references, individual package dimensions, server-calculated totals, validated scans, depot isolation, optimistic versions, idempotency and audit evidence.
@@ -7,6 +21,8 @@ The first executable milestone for the staged Netley brief. Reuses the inspected
 This repository now includes a working local frontend, REST backend and persistent SQLite database. It is a development foundation for synthetic data, with no live DHL connection or operational release approval. The enterprise stack and integration gates remain in the backlog.
 
 ## Run
+
+For a preview that keeps running after the terminal closes, use `npm run preview` or double-click **Start IFOROS.cmd**. It checks `/api/health`, reuses a healthy IFOROS server, and starts a background process if none is running. Logs are in `.data/preview.log`. The preview is still local synthetic development, not a production deployment.
 
 For VS Code, open `IFOROS.code-workspace`. Included tasks start the app and run the pre-commit checks; the debug configuration starts the local backend. See [commit review](docs/COMMIT_REVIEW.md) for the review scope.
 
