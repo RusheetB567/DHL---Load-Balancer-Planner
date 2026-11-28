@@ -1,5 +1,7 @@
 # IFOROS — freight operations foundation
 
+New: [advance freight forecasting, request-only FLEXI support, address-camera capture and premium route/stop workflows](docs/ADVANCE_PLANNING_AND_PREMIUM.md). These use the photographed territory catalogue as draft data pending depot review.
+
 ## Start here — for depot staff and drivers
 
 IFOROS helps staff check parcels into the depot, organise them by **Finger 1, 2 or 3** and **A/B cycle**, plan delivery runs, and let drivers check their assigned parcels and request changes.

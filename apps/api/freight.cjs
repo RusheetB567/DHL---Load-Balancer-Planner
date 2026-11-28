@@ -29,7 +29,7 @@ function normalize(body){
  }
  if(body.format==='csv'){
   const grouped=new Map();for(const r of parseCSV(body.content)){
-   const meta={reference:r.reference,dueAt:r.dueAt,awb:r.awb||'',mawb:r.mawb||'',hawb:r.hawb||'',client:r.client||'',destination:r.destination||''};
+   const meta={reference:r.reference,dueAt:r.dueAt,awb:r.awb||'',mawb:r.mawb||'',hawb:r.hawb||'',client:r.client||'',destination:r.destination||'',suburb:r.suburb||'',postcode:r.postcode||'',planningDate:r.planningDate||'',planningCycle:r.planningCycle||''};
    if(grouped.has(r.reference))check(JSON.stringify(grouped.get(r.reference).meta)===JSON.stringify(meta),400,'SHIPMENT_CONFLICT','Rows disagree on shipment fields.');else grouped.set(r.reference,{meta,pieces:[]});
    for(const field of ['weightKg','lengthCm','widthCm','heightCm'])check(typeof r[field]==='string'&&r[field].trim()!=='',400,'INVALID_INPUT',`${field} is required.`);
    grouped.get(r.reference).pieces.push({barcode:r.barcode,weightKg:Number(r.weightKg),lengthCm:Number(r.lengthCm),widthCm:Number(r.widthCm),heightCm:Number(r.heightCm)});

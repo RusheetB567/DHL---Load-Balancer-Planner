@@ -1,0 +1,10 @@
+// Reproducible synthetic forecast check, not a deployment capacity claim.
+const {performance}=require('node:perf_hooks'),os=require('node:os'),{randomUUID}=require('node:crypto');
+const {createFreight}=require('../apps/api/freight.cjs'),{createTerritories}=require('../apps/api/territories.cjs');
+const count=Number(process.argv[2]||3500);if(!Number.isInteger(count)||count<1||count>3500)throw Error('Choose 1–3500 synthetic shipments.');
+const staff={id:'bench',role:'supervisor',depot:'NETLEY'},driver={id:'bench-driver',role:'driver',depot:'NETLEY'},f=createFreight(),t=createTerritories(f,{users:[driver]});
+try{t.configure(staff,'AGAB',{version:0,kind:'PERMANENT',reviewed:true,driverId:driver.id,availableMinutes:275,capacityKg:800,capacityM3:8,coveredRunCodes:[]},randomUUID());
+ const start=performance.now();for(let offset=0;offset<count;offset+=1500){const shipments=Array.from({length:Math.min(1500,count-offset)},(_,i)=>({reference:'BENCH-'+(offset+i),synthetic:true,planningDate:'2030-01-01',planningCycle:'A',dueAt:'2030-01-01T17:00:00+10:30',destination:(offset+i+1)+' Synthetic Road',suburb:'Mansfield Park',postcode:'5010',pieces:[{barcode:'BENCH-P-'+(offset+i),weightKg:1,lengthCm:20,widthCm:20,heightCm:20}]}));f.importFreight(staff,{format:'json',shipments},randomUUID());}
+ const imported=performance.now(),forecast=t.forecast(staff,'2030-01-01','A'),finished=performance.now();if(forecast.expectedShipments!==count||forecast.matchedPieces!==count||forecast.receivedPieces!==0)throw Error('Forecast count reconciliation failed.');
+ console.log(JSON.stringify({scenario:'Synthetic single-cycle pre-arrival forecast',node:process.version,os:os.platform(),cpu:os.cpus()[0]?.model,logicalCPUs:os.cpus().length,shipments:count,pieces:forecast.expectedPieces,matchedPieces:forecast.matchedPieces,receivedPieces:forecast.receivedPieces,importMilliseconds:Math.round(imported-start),forecastMilliseconds:Math.round(finished-imported),storage:'in-memory SQLite',concurrentUsers:1,roadProvider:'not used',limitation:'No concurrent, disk, device, routing or production load-test claim.'},null,2));
+}finally{f.close();}

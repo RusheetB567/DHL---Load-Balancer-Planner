@@ -8,11 +8,17 @@
   "scripts": {
     "dev": "node scripts/dev.cjs",
     "preview": "node scripts/preview.cjs",
+    "benchmark:forecast": "node scripts/forecast-benchmark.cjs",
     "start": "node apps/api/server.cjs",
     "test": "node --test --test-isolation=none tests/*.test.cjs",
-    "check": "node --check apps/api/server.cjs && node --check apps/api/freight.cjs && node --check scripts/dev.cjs && node --check apps/web/app.js && node --check apps/web/scanner.js && node --check apps/api/planning.cjs && node --check apps/api/routing.cjs && node --check apps/web/planning.js && node --check apps/web/experience.js && node --check apps/web/route-map.js && node --check apps/api/operations.cjs && node --check apps/api/workload.cjs && node --check scripts/preview.cjs"
+    "check": "node --check apps/api/server.cjs && node --check apps/api/freight.cjs && node --check scripts/dev.cjs && node --check apps/web/app.js && node --check apps/web/scanner.js && node --check apps/api/planning.cjs && node --check apps/api/routing.cjs && node --check apps/web/planning.js && node --check apps/web/experience.js && node --check apps/web/route-map.js && node --check apps/api/operations.cjs && node --check apps/api/workload.cjs && node --check scripts/preview.cjs && node --check apps/api/territories.cjs && node --check apps/web/address-capture.js && node --check apps/web/forecast.js && node --check apps/web/premium.js"
   },
   "dependencies": {
-    "@zxing/library": "^0.23.0"
+    "@tesseract.js-data/eng": "^1.0.0",
+    "@zxing/library": "^0.23.0",
+    "tesseract.js": "^7.0.0"
+  },
+  "devDependencies": {
+    "jsdom": "^31.0.1"
   }
 }

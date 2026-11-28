@@ -35,7 +35,7 @@ render=async function(){
 };
 fetch('/api/demo').then(async response=>{
  if(!response.ok)return;const demo=await response.json();
- const roles=document.createElement('div');roles.className='role-choices';roles.innerHTML=`<button type="button" data-role="local-supervisor"><span>▦</span><strong>Depot workspace</strong><small>Receive freight, plan runs and support drivers</small><b>Open depot →</b></button><button type="button" data-role="local-driver"><span>➜</span><strong>Driver workspace</strong><small>Scan your parcels and follow your daily route</small><b>Open my route →</b></button>`;
+ const roles=document.createElement('div');roles.className='role-choices';roles.innerHTML=`<button type="button" data-role="local-supervisor"><span>▦</span><strong>Depot workspace</strong><small>Forecast incoming freight, plan runs and request FLEXI support</small><b>Open depot →</b></button><button type="button" data-role="local-driver"><span>➜</span><strong>Driver workspace</strong><small>Scan your parcels and follow your daily route</small><b>Open my route →</b></button>`;
  $('#login').prepend(roles);$('#login-form').hidden=true;
  roles.querySelectorAll('button').forEach(b=>b.onclick=()=>{const account=demo.users.find(u=>u.id===b.dataset.role);if(!account)return;$('#token').value=account.token;$('#login-form').requestSubmit();});
 }).catch(()=>{});
